@@ -110,13 +110,13 @@ def log_in():
         sleep(10)
 
 
-setUp()
-create_new_account()
-validate_new_account()
-log_out()
-log_in()
-log_out()
-tearDown()
+#setUp()
+#create_new_account()
+#validate_new_account()
+#log_out()
+#log_in()
+#log_out()
+#tearDown()
 
 
 
