@@ -1,7 +1,6 @@
 # Project Info
 ## Purpose
 ### To create automated test to test basic business critical functionality of an eCommerce web application Advantage Online Shopping 
-
 ####AOS: Python project structure setup
 --------------------------------------------
 Here, under AOS directory three Python files are created.

@@ -61,7 +61,8 @@ def create_new_account():
             sleep(0.25)
             driver.find_element(By.XPATH, "//input[@name= 'phone_numberRegisterPage']").send_keys(locators.phone)
             sleep(0.25)
-            Select(driver.find_element(By.XPATH, '//*[@id="formCover"]/div[3]/div[1]/sec-view[1]/div/select')).select_by_visible_text('Canada')
+            #Select(driver.find_element(By.XPATH, '//*[@id="formCover"]/div[3]/div[1]/sec-view[1]/div/select')).select_by_visible_text('Canada')\
+            Select(driver.find_element(By.XPATH, "//select[@name = 'countryListboxRegisterPage']")).select_by_visible_text(                'Canada')
             sleep(0.25)
             driver.find_element(By.XPATH, "//input[@name= 'cityRegisterPage']").send_keys(locators.city)
             sleep(0.25)
@@ -71,9 +72,11 @@ def create_new_account():
             sleep(0.25)
             driver.find_element(By.XPATH, "//input[@name= 'postal_codeRegisterPage']").send_keys(locators.postal_code)
             sleep(0.25)
-            driver.find_element(By.XPATH, '//*[@id="formCover"]/sec-view/div/input').click()
+            #driver.find_element(By.XPATH, '//*[@id="formCover"]/sec-view/div/input').click()
+            driver.find_element(By.XPATH, '//input[@name="i_agree"]').click()
             sleep(0.25)
-            driver.find_element(By.XPATH, '//*[@id="registerPage"]/article/sec-form/div[2]/sec-sender').click()
+            driver.find_element(By.XPATH, '//button[@id="register_btnundefined"]').click()
+            #driver.find_element(By.XPATH, '//*[@id="registerPage"]/article/sec-form/div[2]/sec-sender').click()
             sleep(5)
 
 def validate_new_account():
