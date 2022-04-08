@@ -80,14 +80,13 @@ def create_new_account():
             sleep(5)
 
 def validate_new_account():
-        if driver.current_url == locators.aos_url:
-            sleep(1)
-            print(f'new account created successfully with username :{locators.new_username}')
-
-            sleep(1)
-        else:
-            print(f'new account not created successfully. please verify all the required fields (*) are completed')
-
+    if driver.current_url == 'https://advantageonlineshopping.com/#/':
+       if driver.find_element(By.XPATH, '//*[@id="menuUserLink"]/span').text == locators.new_username:
+           sleep(1)
+           print(f'username :{locators.new_username} is displayed')
+       else:
+            print(f'something went wrong:')
+            sleep(3)
 
 def log_out():
     driver.find_element(By.ID, 'menuUserLink').click()
@@ -104,22 +103,25 @@ def log_in():
     if driver.current_url == locators.aos_url:
         driver.find_element(By.ID, 'menuUser').click()
         sleep(3)
-        driver.find_element(By.XPATH, '/html/body/login-modal/div/div/div[3]/sec-form/sec-view[1]/div/input').send_keys(locators.new_username)
+
+        driver.find_element(By.NAME, 'username').send_keys(locators.new_username)
         sleep(3)
-        driver.find_element(By.XPATH, '/html/body/login-modal/div/div/div[3]/sec-form/sec-view[2]/div/input').send_keys(locators.new_password)
+
+        driver.find_element(By.NAME, 'password').send_keys(locators.new_password)
         sleep(3)
         driver.find_element(By.ID, 'sign_in_btnundefined').click()
         print(f'logged in successfully to the New account with username: {locators.new_username}')
-        sleep(10)
+        sleep(3)
 
 
-#setUp()
-#create_new_account()
-#validate_new_account()
-#log_out()
-#log_in()
-#log_out()
-#tearDown()
+setUp()
+create_new_account()
+validate_new_account()
+log_out()
+log_in()
+validate_new_account()
+log_out()
+tearDown()
 
 
 
