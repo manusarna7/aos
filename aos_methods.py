@@ -119,6 +119,54 @@ def log_in():
         print(f'logged in successfully to the New account with username: {locators.new_username}')
         sleep(3)
 
+
+def checkout_shoppingcart():
+    driver.get(locators.aos_product_url)
+    if driver.current_url == locators.aos_product_url:
+        driver.find_element(By.NAME, 'save_to_cart').click()
+        sleep(1)
+        driver.find_element(By.ID, 'checkOutPopUp').click()
+        sleep(1)
+        if driver.find_element(By.XPATH, '//label[contains(text(), locators.fullname )]'):
+            print(f'fullname is displayed')
+        driver.find_element(By.ID, 'next_btn').click()
+        sleep(1)
+        driver.find_element(By.XPATH, "//input[@name= 'safepay_username']").send_keys(locators.new_username)
+        sleep(1)
+        driver.find_element(By.XPATH, "//input[@name= 'safepay_password']").send_keys(locators.new_password)
+        sleep(1)
+        driver.find_element(By.XPATH, '//button[@id="pay_now_btn_SAFEPAY"]').click()
+        sleep(1)
+
+def validate_order():
+    if driver.find_element(By.ID, 'orderPaymentSuccess'):
+        print(f'Thank you for buying with Advantage')
+        locators.tracking_number = driver.find_element(By.ID, 'trackingNumberLabel').text
+        print(locators.tracking_number)
+        locators.order_number = driver.find_element(By.ID, 'orderNumberLabel').text
+        print(locators.order_number)
+        if driver.find_element(By.XPATH, '//label[contains(text(), locators.fullname )]'):
+            print(f'fullname is displayed')
+        if driver.find_element(By.XPATH, '//label[contains(text(), locators.phone )]'):
+            print(f'phone number is displayed')
+    else:
+        print(f' Thank you for buying with Advantage message is not .something went wrong')
+
+
+def Validate_Order_Page():
+    driver.get(locators.aos_myorders_url)
+    if driver.current_url == locators.aos_myorders_url:
+        if driver.find_element(By.XPATH, '//label[contains(text(), locators.order_number )]'):
+          print(f'orderNumber is good')
+
+def Delete_Order_Page():
+    driver.find_element(By.XPATH, '//a[contains(text(),"REMOVE")]').click()
+
+    sleep(2)
+    driver.find_element(By.ID, 'confBtn_1').click()
+    sleep(1)
+    print(f'Order has been deleted')
+
 def validate_homepage_texts_links():
     if driver.current_url == locators.aos_url:
         if driver.find_element(By.ID, 'speakersTxt').text == "SPEAKERS":
@@ -258,6 +306,13 @@ def validate_homepage_texts_links():
 #log_out()
 #log_in()
 #validate_new_account()
+#checkout_shoppingcart()
+#validate_order()
+
+#log_out()
+#log_in()
+#Validate_Order_Page()
+#Delete_Order_Page()
 #log_out()
 #tearDown()
 

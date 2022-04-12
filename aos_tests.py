@@ -13,8 +13,13 @@ class AOSPositiveTestCases(unittest.TestCase):
         methods.validate_new_account()
         methods.log_out()
         methods.log_in()
+        methods.validate_new_account()
+        methods.checkout_shoppingcart()
+        methods.validate_order()
         methods.log_out()
-        methods.validate_homepage_texts_links()
-        methods.tearDown()
+        methods.log_in()
+        methods.Validate_Order_Page()
+        methods.Delete_Order_Page()
+
 
 
