@@ -45,6 +45,80 @@ def tearDown():
     else:
         print(f'unable to close and quit')
 
+def create_new_account():
+    if driver.current_url == locators.aos_url:
+       driver.find_element(By.ID, 'menuUser').click()
+       sleep(3)
+       driver.find_element(By.LINK_TEXT, 'CREATE NEW ACCOUNT').click()
+       sleep(3)
+       if driver.current_url == 'https://advantageonlineshopping.com/#/register': #or driver.title == '&nbsp;Advantage Shopping':
+            #driver.find_element(By.XPATH, '//*[@id="formCover"]/sec-view/div/input').send_keys(locators.new_username)
+            driver.find_element(By.XPATH, "//input[@name= 'usernameRegisterPage']").send_keys(locators.new_username)
+            sleep(0.25)
+            driver.find_element(By.XPATH, "//input[@name= 'emailRegisterPage']").send_keys(locators.email)
+            sleep(0.25)
+            driver.find_element(By.XPATH, "//input[@name= 'passwordRegisterPage']").send_keys(locators.new_password)
+            sleep(0.25)
+            driver.find_element(By.XPATH, "//input[@name= 'confirm_passwordRegisterPage']").send_keys(locators.new_password)
+            sleep(0.25)
+            driver.find_element(By.XPATH, "//input[@name= 'first_nameRegisterPage']").send_keys(locators.firstname)
+            sleep(0.25)
+            driver.find_element(By.XPATH, "//input[@name= 'last_nameRegisterPage']").send_keys(locators.lastname)
+            sleep(0.25)
+            driver.find_element(By.XPATH, "//input[@name= 'phone_numberRegisterPage']").send_keys(locators.phone)
+            sleep(0.25)
+            #Select(driver.find_element(By.XPATH, '//*[@id="formCover"]/div[3]/div[1]/sec-view[1]/div/select')).select_by_visible_text('Canada')\
+            Select(driver.find_element(By.XPATH, "//select[@name = 'countryListboxRegisterPage']")).select_by_visible_text(                'Canada')
+            sleep(0.25)
+            driver.find_element(By.XPATH, "//input[@name= 'cityRegisterPage']").send_keys(locators.city)
+            sleep(0.25)
+            driver.find_element(By.XPATH, "//input[@name= 'addressRegisterPage']").send_keys(locators.address)
+            sleep(0.25)
+            driver.find_element(By.XPATH, "//input[@name= 'state_/_province_/_regionRegisterPage']").send_keys(locators.province)
+            sleep(0.25)
+            driver.find_element(By.XPATH, "//input[@name= 'postal_codeRegisterPage']").send_keys(locators.postal_code)
+            sleep(0.25)
+            #driver.find_element(By.XPATH, '//*[@id="formCover"]/sec-view/div/input').click()
+            driver.find_element(By.XPATH, '//input[@name="i_agree"]').click()
+            sleep(0.25)
+            driver.find_element(By.XPATH, '//button[@id="register_btnundefined"]').click()
+            #driver.find_element(By.XPATH, '//*[@id="registerPage"]/article/sec-form/div[2]/sec-sender').click()
+            sleep(5)
+
+def validate_new_account():
+    if driver.current_url == 'https://advantageonlineshopping.com/#/':
+       if driver.find_element(By.XPATH, '//*[@id="menuUserLink"]/span').text == locators.new_username:
+           sleep(1)
+           print(f'username :{locators.new_username} is displayed')
+       else:
+            print(f'something went wrong:')
+            sleep(3)
+
+def log_out():
+    driver.find_element(By.ID, 'menuUserLink').click()
+    sleep(1)
+    driver.find_element(By.XPATH, '//*[@id="loginMiniTitle"]/label[3]').click()
+    sleep(1)
+    if driver.current_url == locators.aos_url:
+        print(f'logged out successfully at :{datetime.datetime.now()}')
+        sleep(1)
+    else:
+        print(f' not able to logged out.something went wrong')
+
+def log_in():
+    if driver.current_url == locators.aos_url:
+        driver.find_element(By.ID, 'menuUser').click()
+        sleep(3)
+
+        driver.find_element(By.NAME, 'username').send_keys(locators.new_username)
+        sleep(3)
+
+        driver.find_element(By.NAME, 'password').send_keys(locators.new_password)
+        sleep(3)
+        driver.find_element(By.ID, 'sign_in_btnundefined').click()
+        print(f'logged in successfully to the New account with username: {locators.new_username}')
+        sleep(3)
+
 def validate_homepage_texts_links():
     if driver.current_url == locators.aos_url:
         if driver.find_element(By.ID, 'speakersTxt').text == "SPEAKERS":
@@ -177,7 +251,17 @@ def validate_homepage_texts_links():
     driver.switch_to.window(driver.window_handles[0])
     sleep(1)
 
+#Lab 3
+#setUp()
+#create_new_account()
+#validate_new_account()
+#log_out()
+#log_in()
+#validate_new_account()
+#log_out()
+#tearDown()
 
+#Lab 4
 #setUp()
 #validate_homepage_texts_links()
 #tearDown()
