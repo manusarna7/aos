@@ -167,6 +167,14 @@ def Delete_Order_Page():
     sleep(1)
     print(f'Order has been deleted')
 
+
+
+
+
+
+
+
+
 def validate_homepage_texts_links():
     if driver.current_url == locators.aos_url:
         if driver.find_element(By.ID, 'speakersTxt').text == "SPEAKERS":
