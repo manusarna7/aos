@@ -18,7 +18,7 @@ driver = webdriver.Chrome(service=s)
 
 
 # Fixture method - to open web browser
-def setUp():
+def setup():
     # Make a full screen
     driver.maximize_window()
     # Let's wait for the browser response in general
@@ -31,8 +31,8 @@ def setUp():
         print(f'We\'re seeing title message -- {driver.title}')
     else:
         print(f'We\'re not at the homepage. Check your code!')
-        #driver.close()
-        #driver.quit()
+        # driver.close()
+        # driver.quit()
 
 def tearDown():
     if driver is not None:
@@ -67,7 +67,7 @@ def create_new_account():
             sleep(0.25)
             driver.find_element(By.XPATH, "//input[@name= 'phone_numberRegisterPage']").send_keys(locators.phone)
             sleep(0.25)
-            #Select(driver.find_element(By.XPATH, '//*[@id="formCover"]/div[3]/div[1]/sec-view[1]/div/select')).select_by_visible_text('Canada')\
+            # Select(driver.find_element(By.XPATH, '//*[@id="formCover"]/div[3]/div[1]/sec-view[1]/div/select')).select_by_visible_text('Canada')\
             Select(driver.find_element(By.XPATH, "//select[@name = 'countryListboxRegisterPage']")).select_by_visible_text(                'Canada')
             sleep(0.25)
             driver.find_element(By.XPATH, "//input[@name= 'cityRegisterPage']").send_keys(locators.city)
@@ -78,11 +78,11 @@ def create_new_account():
             sleep(0.25)
             driver.find_element(By.XPATH, "//input[@name= 'postal_codeRegisterPage']").send_keys(locators.postal_code)
             sleep(0.25)
-            #driver.find_element(By.XPATH, '//*[@id="formCover"]/sec-view/div/input').click()
+            # driver.find_element(By.XPATH, '//*[@id="formCover"]/sec-view/div/input').click()
             driver.find_element(By.XPATH, '//input[@name="i_agree"]').click()
             sleep(0.25)
             driver.find_element(By.XPATH, '//button[@id="register_btnundefined"]').click()
-            #driver.find_element(By.XPATH, '//*[@id="registerPage"]/article/sec-form/div[2]/sec-sender').click()
+            # driver.find_element(By.XPATH, '//*[@id="registerPage"]/article/sec-form/div[2]/sec-sender').click()
             sleep(5)
 
 def validate_new_account():
@@ -218,7 +218,7 @@ def validate_homepage_texts_links():
             print(f'Mice title is displayed')
         else:
             print(f'Mice title is not displayed')
-            sleep (2)
+            sleep(2)
 
         try:
             driver.find_element(By.XPATH, "//a[text() = 'SPECIAL OFFER']").click()
@@ -250,7 +250,7 @@ def validate_homepage_texts_links():
         sleep(1)
         driver.find_element(By.ID, 'send_btnundefined').click()
         sleep(1)
-    #if driver.find_element(By.XPATH, "//*[@id='registerSuccessCover']/div/p']").text == 'Thank you for contacting Advantage support':
+    # if driver.find_element(By.XPATH, "//*[@id='registerSuccessCover']/div/p']").text == 'Thank you for contacting Advantage support':
 
     if driver.find_element(By.XPATH, '//p[contains(text(), "Thank you for contacting Advantage support")]'):
         print(f'Thank you message for contact form is displayed')
@@ -305,9 +305,9 @@ def validate_homepage_texts_links():
     except WebDriverException as ex:
         print(ex.msg)
 
-    #bb = driver.find_element(By.TAG_NAME, 'body')
-    #print(bb)
-    #bb.send_keys(Keys.COMMAND + 'W')
+    # bb = driver.find_element(By.TAG_NAME, 'body')
+    # print(bb)
+    # bb.send_keys(Keys.COMMAND + 'W')
     driver.switch_to.window(driver.window_handles[3])
     driver.close()
     sleep(1)
@@ -320,24 +320,24 @@ def validate_homepage_texts_links():
     driver.switch_to.window(driver.window_handles[0])
     sleep(1)
 
-#Lab 3
-#setUp()
-#validate_homepage_texts_links()
-#create_new_account()
-#validate_new_account()
-#log_out()
-#log_in()
-#validate_new_account()
-#checkout_shoppingcart()
-#validate_order()
-#log_out()
-#log_in()
-#Validate_Order_Page()
-#Delete_Order_Page()
-#delete_user_account()
-#log_out()
-#log_in()
-#tearDown()
+# Lab 3
+# setup()
+# validate_homepage_texts_links()
+# create_new_account()
+# validate_new_account()
+# log_out()
+# log_in()
+# validate_new_account()
+# checkout_shoppingcart()
+# validate_order()
+# log_out()
+# log_in()
+# Validate_Order_Page()
+# Delete_Order_Page()
+# delete_user_account()
+# log_out()
+# log_in()
+# tearDown()
 
 
 

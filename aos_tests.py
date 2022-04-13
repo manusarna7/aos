@@ -1,14 +1,12 @@
 import unittest
 import aos_methods as methods
-import aos_locators as locators
-
 
 
 class AOSPositiveTestCases(unittest.TestCase):
 
-    @staticmethod # signal to Unittest framework that this is a function inside the class (vs. @classmethod)
+    @staticmethod  # signal to Unittest framework that this is a function inside the class (vs. @classmethod)
     def test_create_new_account():  # test_ in the name is mandatory
-        methods.setUp()
+        methods.setup()
         methods.validate_homepage_texts_links()
         methods.create_new_account()
         methods.validate_new_account()
@@ -25,6 +23,3 @@ class AOSPositiveTestCases(unittest.TestCase):
         methods.delete_user_account()
         methods.log_in()
         methods.tearDown()
-
-
-
