@@ -106,6 +106,7 @@ def log_out():
         print(f' not able to logged out.something went wrong')
 
 def log_in():
+    sleep(3)
     if driver.current_url == locators.aos_url:
         driver.find_element(By.ID, 'menuUser').click()
         sleep(3)
@@ -116,7 +117,12 @@ def log_in():
         driver.find_element(By.NAME, 'password').send_keys(locators.new_password)
         sleep(3)
         driver.find_element(By.ID, 'sign_in_btnundefined').click()
-        print(f'logged in successfully to the New account with username: {locators.new_username}')
+        sleep(1)
+
+        if driver.find_element(By.ID, 'signInResultMessage').text == "Incorrect user name or password.":
+            print("user don't exist")
+        else:
+            print(f'logged in successfully to the New account with username: {locators.new_username}')
         sleep(3)
 
 
@@ -167,13 +173,20 @@ def Delete_Order_Page():
     sleep(1)
     print(f'Order has been deleted')
 
+def delete_user_account():
+    driver.find_element(By.ID, 'hrefUserIcon').click()
+    driver.find_element(By.XPATH, '//*[@id="loginMiniTitle"]/label[1]').click()
+    sleep(1)
+    if driver.find_element(By.XPATH, '//label[contains(text(), locators.fullname )]'):
+        print(f'fullname is displayed')
+    else:
+        print(f'fullname is not displayed  .something went wrong')
+        sleep(1)
 
-
-
-
-
-
-
+    driver.find_element(By.XPATH, '//*[@id="myAccountContainer"]/div[6]/button').click()
+    sleep(2)
+    driver.find_element(By.XPATH, '//*[@id="deleteAccountPopup"]/div[3]/div[1]').click()
+    sleep(3)
 
 def validate_homepage_texts_links():
     if driver.current_url == locators.aos_url:
@@ -309,6 +322,7 @@ def validate_homepage_texts_links():
 
 #Lab 3
 #setUp()
+#validate_homepage_texts_links()
 #create_new_account()
 #validate_new_account()
 #log_out()
@@ -316,18 +330,17 @@ def validate_homepage_texts_links():
 #validate_new_account()
 #checkout_shoppingcart()
 #validate_order()
-
 #log_out()
 #log_in()
 #Validate_Order_Page()
 #Delete_Order_Page()
+#delete_user_account()
 #log_out()
+#log_in()
 #tearDown()
 
-#Lab 4
-#setUp()
-#validate_homepage_texts_links()
-#tearDown()
+
+
 
 
 

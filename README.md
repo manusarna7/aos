@@ -9,20 +9,28 @@
 (where tests are developed) https://advantageonlineshopping.com/
 
 *Localhost version can be installed and used as well
+
 *Local host URL: http://localhost:8080/
+
 *Local installation requires PosgreSQL database version 10 or up
+
 *more details on local installation:https://advantageonlineshopping.com/#/version
 
 ### Automation Environment
 
 (Tools, Technologies Used to develop automated tests)
 
-IDE: PyCharm
-Automation Framework: Selenium Webdriver
-Language: Python 3.9
-Browser: Chrome
-Source Control: Git/GitHub
-Data: Python Faker library, v 11.3
+*IDE: PyCharm
+
+*Automation Framework: Selenium Webdriver
+
+*Language: Python 3.9
+
+*Browser: Chrome
+
+*Source Control: Git/GitHub
+
+*Data: Python Faker library, v 11.3
 
 ### Execution Environment
 
