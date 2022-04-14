@@ -1,17 +1,11 @@
-import sys
 import datetime
-from selenium.common.exceptions import NoSuchElementException
 import aos_locators as locators
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import WebDriverException
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
 
 s = Service(executable_path='../chromedriver.exe')
 driver = webdriver.Chrome(service=s)
@@ -25,7 +19,7 @@ def setup():
     driver.implicitly_wait(30)
     # navigating to the advantageonlineshopping website
     driver.get(locators.aos_url)
-    # Checking that we're on the correct URL address and we're seeing correct title
+    # Checking that we're on the correct URL address ,and we're seeing correct title
     if driver.current_url == locators.aos_url and driver.title == ' Advantage Shopping':
         print(f'We\'re at homepage -- {driver.current_url}')
         print(f'We\'re seeing title message -- {driver.title}')
@@ -34,8 +28,10 @@ def setup():
         # driver.close()
         # driver.quit()
 
-def tearDown():
+
+def teardown():
     if driver is not None:
+
         print(f'-------------------')
         print(f'Hurray.Test is done successfully')
         print(f'Test Completed at: {datetime.datetime.now()}')
@@ -45,21 +41,22 @@ def tearDown():
     else:
         print(f'unable to close and quit')
 
+
 def create_new_account():
     if driver.current_url == locators.aos_url:
-       driver.find_element(By.ID, 'menuUser').click()
-       sleep(3)
-       driver.find_element(By.LINK_TEXT, 'CREATE NEW ACCOUNT').click()
-       sleep(3)
-       if driver.current_url == 'https://advantageonlineshopping.com/#/register': #or driver.title == '&nbsp;Advantage Shopping':
-            #driver.find_element(By.XPATH, '//*[@id="formCover"]/sec-view/div/input').send_keys(locators.new_username)
+        driver.find_element(By.ID, 'menuUser').click()
+        sleep(3)
+        driver.find_element(By.LINK_TEXT, 'CREATE NEW ACCOUNT').click()
+        sleep(3)
+        if driver.current_url == 'https://advantageonlineshopping.com/#/register':
             driver.find_element(By.XPATH, "//input[@name= 'usernameRegisterPage']").send_keys(locators.new_username)
             sleep(0.25)
             driver.find_element(By.XPATH, "//input[@name= 'emailRegisterPage']").send_keys(locators.email)
             sleep(0.25)
             driver.find_element(By.XPATH, "//input[@name= 'passwordRegisterPage']").send_keys(locators.new_password)
             sleep(0.25)
-            driver.find_element(By.XPATH, "//input[@name= 'confirm_passwordRegisterPage']").send_keys(locators.new_password)
+            driver.find_element(By.XPATH, "//input[@name= 'confirm_passwordRegisterPage']").send_keys(
+                locators.new_password)
             sleep(0.25)
             driver.find_element(By.XPATH, "//input[@name= 'first_nameRegisterPage']").send_keys(locators.firstname)
             sleep(0.25)
@@ -67,14 +64,16 @@ def create_new_account():
             sleep(0.25)
             driver.find_element(By.XPATH, "//input[@name= 'phone_numberRegisterPage']").send_keys(locators.phone)
             sleep(0.25)
-            # Select(driver.find_element(By.XPATH, '//*[@id="formCover"]/div[3]/div[1]/sec-view[1]/div/select')).select_by_visible_text('Canada')\
-            Select(driver.find_element(By.XPATH, "//select[@name = 'countryListboxRegisterPage']")).select_by_visible_text(                'Canada')
+            Select(
+                driver.find_element(By.XPATH, "//select[@name = 'countryListboxRegisterPage']")).select_by_visible_text(
+                'Canada')
             sleep(0.25)
             driver.find_element(By.XPATH, "//input[@name= 'cityRegisterPage']").send_keys(locators.city)
             sleep(0.25)
             driver.find_element(By.XPATH, "//input[@name= 'addressRegisterPage']").send_keys(locators.address)
             sleep(0.25)
-            driver.find_element(By.XPATH, "//input[@name= 'state_/_province_/_regionRegisterPage']").send_keys(locators.province)
+            driver.find_element(By.XPATH, "//input[@name= 'state_/_province_/_regionRegisterPage']").send_keys(
+                locators.province)
             sleep(0.25)
             driver.find_element(By.XPATH, "//input[@name= 'postal_codeRegisterPage']").send_keys(locators.postal_code)
             sleep(0.25)
@@ -85,14 +84,16 @@ def create_new_account():
             # driver.find_element(By.XPATH, '//*[@id="registerPage"]/article/sec-form/div[2]/sec-sender').click()
             sleep(5)
 
+
 def validate_new_account():
     if driver.current_url == 'https://advantageonlineshopping.com/#/':
-       if driver.find_element(By.XPATH, '//*[@id="menuUserLink"]/span').text == locators.new_username:
-           sleep(1)
-           print(f'username :{locators.new_username} is displayed')
-       else:
+        if driver.find_element(By.XPATH, '//*[@id="menuUserLink"]/span').text == locators.new_username:
+            sleep(1)
+            print(f'username :{locators.new_username} is displayed')
+        else:
             print(f'something went wrong:')
             sleep(3)
+
 
 def log_out():
     driver.find_element(By.ID, 'menuUserLink').click()
@@ -104,6 +105,7 @@ def log_out():
         sleep(1)
     else:
         print(f' not able to logged out.something went wrong')
+
 
 def log_in():
     sleep(3)
@@ -144,6 +146,7 @@ def checkout_shoppingcart():
         driver.find_element(By.XPATH, '//button[@id="pay_now_btn_SAFEPAY"]').click()
         sleep(1)
 
+
 def validate_order():
     if driver.find_element(By.ID, 'orderPaymentSuccess'):
         print(f'Thank you for buying with Advantage')
@@ -159,19 +162,21 @@ def validate_order():
         print(f' Thank you for buying with Advantage message is not .something went wrong')
 
 
-def Validate_Order_Page():
+def validate_order_page():
     driver.get(locators.aos_myorders_url)
     if driver.current_url == locators.aos_myorders_url:
         if driver.find_element(By.XPATH, '//label[contains(text(), locators.order_number )]'):
-          print(f'orderNumber is good')
+            print(f'orderNumber is good')
 
-def Delete_Order_Page():
+
+def delete_order_page():
     driver.find_element(By.XPATH, '//a[contains(text(),"REMOVE")]').click()
 
     sleep(2)
     driver.find_element(By.ID, 'confBtn_1').click()
     sleep(1)
     print(f'Order has been deleted')
+
 
 def delete_user_account():
     driver.find_element(By.ID, 'hrefUserIcon').click()
@@ -187,6 +192,7 @@ def delete_user_account():
     sleep(2)
     driver.find_element(By.XPATH, '//*[@id="deleteAccountPopup"]/div[3]/div[1]').click()
     sleep(3)
+
 
 def validate_homepage_texts_links():
     if driver.current_url == locators.aos_url:
@@ -242,7 +248,8 @@ def validate_homepage_texts_links():
     if driver.current_url == 'https://advantageonlineshopping.com/#/':
         Select(driver.find_element(By.NAME, 'categoryListboxContactUs')).select_by_visible_text('Laptops')
         sleep(1)
-        Select(driver.find_element(By.NAME, 'productListboxContactUs')).select_by_visible_text('HP Chromebook 14 G1(ES)')
+        Select(driver.find_element(By.NAME, 'productListboxContactUs')).select_by_visible_text(
+            'HP Chromebook 14 G1(ES)')
         sleep(1)
         driver.find_element(By.XPATH, "//input[@name= 'emailContactUs']").send_keys(locators.email)
         sleep(1)
@@ -250,8 +257,6 @@ def validate_homepage_texts_links():
         sleep(1)
         driver.find_element(By.ID, 'send_btnundefined').click()
         sleep(1)
-    # if driver.find_element(By.XPATH, "//*[@id='registerSuccessCover']/div/p']").text == 'Thank you for contacting Advantage support':
-
     if driver.find_element(By.XPATH, '//p[contains(text(), "Thank you for contacting Advantage support")]'):
         print(f'Thank you message for contact form is displayed')
 
@@ -273,10 +278,10 @@ def validate_homepage_texts_links():
         print(ex.msg)
 
     try:
-        facebookLink = driver.find_element(By.NAME, 'follow_facebook')
-        if facebookLink.is_displayed():
+        facebooklink = driver.find_element(By.NAME, 'follow_facebook')
+        if facebooklink.is_displayed():
             print('Facebook link is displayed')
-            facebookLink.click()
+            facebooklink.click()
 
         sleep(3)
         print(f'Facebook link is clickable')
@@ -284,10 +289,10 @@ def validate_homepage_texts_links():
         print(ex.msg)
 
     try:
-        twitterLink = driver.find_element(By.NAME, 'follow_twitter')
-        if twitterLink.is_displayed():
+        twitterlink = driver.find_element(By.NAME, 'follow_twitter')
+        if twitterlink.is_displayed():
             print('Twitter link is displayed')
-            twitterLink.click()
+            twitterlink.click()
 
         sleep(3)
         print(f'Twitter link is clickable')
@@ -295,19 +300,16 @@ def validate_homepage_texts_links():
         print(ex.msg)
 
     try:
-        linkedinLink = driver.find_element(By.NAME, 'follow_linkedin')
-        if linkedinLink.is_displayed():
+        linkedinlink = driver.find_element(By.NAME, 'follow_linkedin')
+        if linkedinlink.is_displayed():
             print('Linkedin link is displayed')
-            linkedinLink.click()
+            linkedinlink.click()
 
         sleep(3)
         print(f'Linkedin link is clickable')
     except WebDriverException as ex:
         print(ex.msg)
 
-    # bb = driver.find_element(By.TAG_NAME, 'body')
-    # print(bb)
-    # bb.send_keys(Keys.COMMAND + 'W')
     driver.switch_to.window(driver.window_handles[3])
     driver.close()
     sleep(1)
@@ -332,16 +334,9 @@ def validate_homepage_texts_links():
 # validate_order()
 # log_out()
 # log_in()
-# Validate_Order_Page()
-# Delete_Order_Page()
+# validate_order_page()
+# delete_order_page()
 # delete_user_account()
 # log_out()
 # log_in()
-# tearDown()
-
-
-
-
-
-
-
+# teardown()
